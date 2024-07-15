@@ -1,0 +1,23 @@
+/*
+ * Copyright (C) 2019 Intel Corporation.  All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ */
+
+enclave {
+	from "sgx_tstdc.edl" import *;
+	from "sgx_pthread.edl" import *;
+
+	trusted {
+		/* define ECALLs here. */
+		public void ecall_enclave_wasm_main(
+			[in, size=wasm_file_size]      const uint8_t *wasm_file,      size_t wasm_file_size,
+			[in, size=wasm_nopt_file_size] const uint8_t *wasm_nopt_file, size_t wasm_nopt_file_size
+		);
+	};
+
+	untrusted {
+		/* define OCALLs here. */
+		void ocall_print([in, string]const char* str);
+		uint64_t ocall_decent_untrusted_timestamp_us();
+	};
+};
