@@ -1,0 +1,7 @@
+enclave_wasm_counter_exceed
+enclave_wasm_exit
+enclave_wasm_print_string
+enclave_wasm_start_benchmark
+enclave_wasm_stop_benchmark
+emscripten_notify_memory_growth
+emscripten_memcpy_js
