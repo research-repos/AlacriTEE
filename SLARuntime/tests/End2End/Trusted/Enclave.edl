@@ -1,0 +1,44 @@
+// Copyright (c) 2023 SLARuntime Authors
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+enclave
+{
+	from "sgx_tstdc.edl" import *;
+	from "sgx_pthread.edl" import *;
+
+	from "DecentEnclave/SgxEDL/decent_common.edl" import *;
+	from "DecentEnclave/SgxEDL/net_io.edl" import *;
+	from "DecentEnclave/SgxEDL/sys_io.edl" import *;
+
+	trusted
+	{
+		/* define ECALLs here. */
+
+		public sgx_status_t ecall_end2end_init(
+			uint64_t chain_id,
+			[in, size=in_sla_addr_size] const uint8_t* in_sla_addr,
+			size_t in_sla_addr_size
+		);
+
+
+		public sgx_status_t ecall_end2end_load_wasm(
+			[in, size=in_wasm_size] const uint8_t* in_wasm,
+			size_t in_wasm_size
+		);
+
+		public sgx_status_t ecall_end2end_run_func(
+			[in, size=in_event_id_size] const uint8_t* in_event_id,
+			size_t in_event_id_size,
+			[in, size=in_msg_size] const uint8_t* in_msg,
+			size_t in_msg_size
+		);
+
+	}; // trusted
+
+	untrusted
+	{
+	}; // untrusted
+
+}; // enclave

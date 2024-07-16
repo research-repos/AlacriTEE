@@ -1,0 +1,9 @@
+enclave_wasm_counter_exceed
+enclave_wasm_exit
+enclave_wasm_print_string
+enclave_wasm_start_benchmark
+enclave_wasm_stop_benchmark
+enclave_wasm_get_event_id_len
+enclave_wasm_get_event_id
+enclave_wasm_get_event_data_len
+enclave_wasm_get_event_data

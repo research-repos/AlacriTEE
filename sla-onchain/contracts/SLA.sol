@@ -53,7 +53,11 @@ contract SLA {
     uint32  constant DISPUTE_RESPONSE_PERIOD = 2;   // in number of blocks
     uint256 constant DISPUTE_RESPONSE_COST = 90000;
 
-    uint8 constant CHKPT_REPORT_ENTRY_SIZE = 8;
+    uint8 constant CHKPT_REPORT_FIELD_UNIT_SIZE = 8;
+    uint8 constant CHKPT_REPORT_FIELD_TIME_SIZE = 4;
+    uint8 constant CHKPT_REPORT_ENTRY_SIZE =
+        CHKPT_REPORT_FIELD_UNIT_SIZE +
+        CHKPT_REPORT_FIELD_TIME_SIZE;
 
     mapping (uint256 => Dispute) m_disputes;
 
@@ -220,6 +224,7 @@ contract SLA {
         // 4. parse the checkpoint data
         uint256 numAccepted = 0;
         uint256 totalUnitsUsed = 0;
+        uint256 totalTimeElapsed = 0;
         for (uint64 i = 0; i < numRequests; i++) {
             uint64 unitsUsed = 0;
 
@@ -230,6 +235,9 @@ contract SLA {
             if (unitsUsed > 0)
             {
                 numAccepted++;
+                totalTimeElapsed = checkpointData.readUint32(
+                    (i * CHKPT_REPORT_ENTRY_SIZE) + CHKPT_REPORT_FIELD_UNIT_SIZE
+                );
             }
         }
 

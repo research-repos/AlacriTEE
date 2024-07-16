@@ -1,0 +1,4 @@
+# WebAssembly executables
+*.wat
+*.wasm
+

@@ -1,0 +1,2 @@
+PyEthHelper==v0.1.6
+cryptography==42.0.8
